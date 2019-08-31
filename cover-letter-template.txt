@@ -8,6 +8,8 @@ CompanyAddress
 
 Dear Gender ContactLastName,
 
+I am writing to express my interest in regards to the PositionName job posting on your website.
+
 
 Sincerely,
 

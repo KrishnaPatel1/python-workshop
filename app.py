@@ -12,7 +12,6 @@ def findAndReplaceText(stringInFile, stringToReplaceWith, nameOfFile):
   with fileinput.FileInput(nameOfFile, inplace=True) as file:
     for line in file:
       print(line.replace(stringInFile, stringToReplaceWith), end='')
-  file.close()
 
 def findValueInDictionariesAndReplace(templateDict, informationDict, nameOfFile):
   for firstKey in templateDict:
@@ -20,10 +19,8 @@ def findValueInDictionariesAndReplace(templateDict, informationDict, nameOfFile)
       if firstKey == secondKey:
         findAndReplaceText(templateDict[firstKey], informationDict[secondKey], nameOfFile)
 
-def findValuesAndReplace(templateDict, string, nameOfFile):
-  for firstKey in templateDict:
-    if firstKey == string:
-      findAndReplaceText(templateDict[firstKey], string, nameOfFile)
+def findValuesAndReplace(dictString, string, nameOfFile):
+  findAndReplaceText(dictString, string, nameOfFile)
 
 # Find and store excel file
 excelFile = xlrd.open_workbook('cover_letters.xlsx', on_demand = True)
@@ -33,6 +30,18 @@ worksheet = excelFile.sheet_by_name('Sheet1')
 # Set total amount of rows and columns
 rows = worksheet.nrows
 columns = worksheet.ncols
+
+boilerPlateTextToReplace = {
+  "myName": "YourName",
+  "myAddress": "YourAddress",
+  "currentDate": "CurrentDate",
+  "companyName": "CompanyName",
+  "firstName": "ContactFirstName",
+  "lastName": "ContactLastName",
+  "gender": "Gender",
+  "positionName": "PositionName",
+  "companyAddress": "CompanyAddress"
+}
 
 # Define your personal details
 name = "Tony Stark"
@@ -47,27 +56,54 @@ coverLetterInformationToAdd = {
   "currentDate": currentDate
 }
 
-boilerPlateTextToReplace = {
-  "myName": "YourName",
-  "myAddress": "YourAddress",
-  "currentDate": "CurrentDate",
-  "firstName": "ContactFirstName",
-  "lastName": "ContactLastName",
-  "companyName": "CompanyName",
-  "companyAddress": "CompanyAddress",
-  "gender": "Gender"
-}
+keyToAdd = None
+stringToReplaceWith = None
+fileName = None
 
 # Define start, end for the range 
 for row in range(1, rows):
   for column in range(columns):
-    # Stop when we reach company name
+    # Company name
     if column == 0:
+      fileName = None
+      keyToAdd = "companyName"
+      stringToReplaceWith = worksheet.cell(row, column).value
       # Copy from template text file and name it based on company name
-      shutil.copyfile("cover-letter-template.txt", worksheet.cell(row, column).value)
+      fileName = worksheet.cell(row, column).value
+      shutil.copyfile("cover-letter-template.txt", fileName)
       findValueInDictionariesAndReplace(
         boilerPlateTextToReplace, 
         coverLetterInformationToAdd, 
-        worksheet.cell(row, column).value)
+        fileName)
       
-    print(worksheet.cell(row, column).value)
+    # First name
+    elif column == 1:
+      keyToAdd = "firstName"
+      stringToReplaceWith = worksheet.cell(row, column).value
+    # Last name
+    elif column == 2:
+      keyToAdd = "lastName"
+      stringToReplaceWith = worksheet.cell(row, column).value
+    # Gender
+    elif column == 3:
+      keyToAdd = "gender"
+      stringToReplaceWith = worksheet.cell(row, column).value
+    # Position Name  
+    elif column == 4:
+      keyToAdd = "positionName"
+      stringToReplaceWith = worksheet.cell(row, column).value
+    # Company Address
+    elif column == 5:
+      keyToAdd = "companyAddress"
+      stringToReplaceWith = worksheet.cell(row, column).value
+    
+    # Replace remaining template values with excel sheet values
+    if keyToAdd != None:
+      findValuesAndReplace(
+        boilerPlateTextToReplace[keyToAdd], 
+        stringToReplaceWith, 
+        fileName)
+
+    # Reset variables
+    keyToAdd = None
+    stringToReplaceWith = None
