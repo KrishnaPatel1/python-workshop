@@ -14,14 +14,16 @@ def findAndReplaceText(stringInFile, stringToReplaceWith, nameOfFile):
       print(line.replace(stringInFile, stringToReplaceWith), end='')
   file.close()
 
-def findValueInDictionary(templateDict, informationDict, nameOfFile):
+def findValueInDictionariesAndReplace(templateDict, informationDict, nameOfFile):
   for firstKey in templateDict:
     for secondKey in informationDict:
       if firstKey == secondKey:
-        print("match")
-        print(firstKey, " second: " , secondKey)
-        print(templateDict[firstKey], "second: ", informationDict[secondKey])
         findAndReplaceText(templateDict[firstKey], informationDict[secondKey], nameOfFile)
+
+def findValuesAndReplace(templateDict, string, nameOfFile):
+  for firstKey in templateDict:
+    if firstKey == string:
+      findAndReplaceText(templateDict[firstKey], string, nameOfFile)
 
 # Find and store excel file
 excelFile = xlrd.open_workbook('cover_letters.xlsx', on_demand = True)
@@ -56,15 +58,6 @@ boilerPlateTextToReplace = {
   "gender": "Gender"
 }
 
-# for firstKey in boilerPlateTextToReplace:
-#   for secondKey in coverLetterInformationToAdd:
-#     switch(firstKey) {
-#       case "YourName"
-#     }
-
-
-#findAndReplaceText("YourName", name, "cover-letter-template.txt")
-
 # Define start, end for the range 
 for row in range(1, rows):
   for column in range(columns):
@@ -72,24 +65,9 @@ for row in range(1, rows):
     if column == 0:
       # Copy from template text file and name it based on company name
       shutil.copyfile("cover-letter-template.txt", worksheet.cell(row, column).value)
-
-      findValueInDictionary(
+      findValueInDictionariesAndReplace(
         boilerPlateTextToReplace, 
         coverLetterInformationToAdd, 
         worksheet.cell(row, column).value)
-
-      # findAndReplaceText(
-      #   boilerPlateTextToReplace["myName"], 
-      #   coverLetterInformationToAdd["myName"], 
-      #   worksheet.cell(row, column).value)
-      # findAndReplaceText(
-      #   boilerPlateTextToReplace["myName"], 
-      #   coverLetterInformationToAdd["myAddress"], 
-      #   worksheet.cell(row, column).value)
-      # findAndReplaceText(
-      #   boilerPlateTextToReplace["currentDate"], 
-      #   coverLetterInformationToAdd["currentDate"], 
-      #   worksheet.cell(row, column).value)
+      
     print(worksheet.cell(row, column).value)
-    # Write text to text file
-    # file.write(worksheet.cell(row, column).value)
