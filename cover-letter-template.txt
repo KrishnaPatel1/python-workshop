@@ -1,0 +1,14 @@
+YourName
+YourAddress
+CurrentDate
+
+ContactFirstName ContactLastName
+CompanyName
+CompanyAddress
+
+Dear Gender ContactLastName,
+
+
+Sincerely,
+
+YourName
