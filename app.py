@@ -31,6 +31,8 @@ worksheet = excelFile.sheet_by_name('Sheet1')
 rows = worksheet.nrows
 columns = worksheet.ncols
 
+# TODO: Make a Object file for this instead
+
 boilerPlateTextToReplace = {
   "myName": "YourName",
   "myAddress": "YourAddress",
@@ -84,7 +86,7 @@ for row in range(1, rows):
     elif column == 2:
       keyToAdd = "lastName"
       stringToReplaceWith = worksheet.cell(row, column).value
-    # Gender
+    # Gender TODO: Add a function for Mr. Ms. instead of Male or female
     elif column == 3:
       keyToAdd = "gender"
       stringToReplaceWith = worksheet.cell(row, column).value
@@ -107,3 +109,6 @@ for row in range(1, rows):
     # Reset variables
     keyToAdd = None
     stringToReplaceWith = None
+
+
+# TODO: Export to Word or PDF code with user input
