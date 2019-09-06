@@ -89,7 +89,10 @@ for row in range(1, rows):
     # Gender TODO: Add a function for Mr. Ms. instead of Male or female
     elif column == 3:
       keyToAdd = "gender"
-      stringToReplaceWith = worksheet.cell(row, column).value
+      if worksheet.cell(row, column).value == "Male":
+        stringToReplaceWith = "Mr."
+      else:
+        stringToReplaceWith = "Ms."
     # Position Name  
     elif column == 4:
       keyToAdd = "positionName"
