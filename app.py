@@ -1,11 +1,16 @@
 # Library which helps to read excel spreadsheets
 import xlrd
+# Library which allows writing to docx format
+# from docx import Document
+# Library to help find current folder
+import os 
 # Library to retrieve current date
 from datetime import date
 # Library to read and modify contents
 import fileinput
 # Library to copy file contents
 import shutil
+
 
 # Function to find text and replace
 def findAndReplaceText(stringInFile, stringToReplaceWith, nameOfFile):
@@ -72,7 +77,7 @@ for row in range(1, rows):
       stringToReplaceWith = worksheet.cell(row, column).value
       # Copy from template text file and name it based on company name
       fileName = worksheet.cell(row, column).value
-      shutil.copyfile("cover-letter-template.txt", fileName)
+      shutil.copyfile("cover-letter-template.txt", fileName + ".txt")
       findValueInDictionariesAndReplace(
         boilerPlateTextToReplace, 
         coverLetterInformationToAdd, 
@@ -112,6 +117,9 @@ for row in range(1, rows):
     # Reset variables
     keyToAdd = None
     stringToReplaceWith = None
+
+    print(shutil.move(fileName + ".txt", os.getcwd() + "/exports"))
+
 
 
 # TODO: Export to Word or PDF code with user input
