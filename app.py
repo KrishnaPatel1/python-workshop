@@ -76,8 +76,8 @@ for row in range(1, rows):
       keyToAdd = "companyName"
       stringToReplaceWith = worksheet.cell(row, column).value
       # Copy from template text file and name it based on company name
-      fileName = worksheet.cell(row, column).value
-      shutil.copyfile("cover-letter-template.txt", fileName + ".txt")
+      fileName = os.getcwd() + "/exports/" + worksheet.cell(row, column).value + ".txt" 
+      shutil.copyfile("cover-letter-template.txt", fileName)
       findValueInDictionariesAndReplace(
         boilerPlateTextToReplace, 
         coverLetterInformationToAdd, 
@@ -117,9 +117,3 @@ for row in range(1, rows):
     # Reset variables
     keyToAdd = None
     stringToReplaceWith = None
-
-    print(shutil.move(fileName + ".txt", os.getcwd() + "/exports"))
-
-
-
-# TODO: Export to Word or PDF code with user input
