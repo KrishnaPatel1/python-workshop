@@ -1,9 +1,11 @@
 # Library which helps to read excel spreadsheets
 import xlrd
 # Library which allows writing to docx format
-# from docx import Document
+from docx import Document
 # Library to help find current folder
-import os 
+import os
+# Library to help search for specific words within files
+import re
 # Library to retrieve current date
 from datetime import date
 # Library to read and modify contents
@@ -117,3 +119,28 @@ for row in range(1, rows):
     # Reset variables
     keyToAdd = None
     stringToReplaceWith = None
+
+# Convert to PDF or Word format
+direct = os.listdir(os.getcwd() + "/exports/")
+#TODO Put this variable somewhere at the top
+user_wants_pfd = False
+path_to_pdf_script = "convert-pdf/txt2pdf.py"
+
+for i in direct:
+    if not i.endswith(".txt"):
+        continue
+
+    name_of_file = i[:-4]
+    path_to_file = "exports/" + i
+
+    if user_wants_pfd:
+        save_file_as = "exports/" + name_of_file + ".pdf"
+        os.system("python " + path_to_pdf_script + " -o " + save_file_as + " -f Tahoma.ttf " + path_to_file)
+    else:
+        document = Document()
+        myfile = open(path_to_file).read()
+        myfile = re.sub(r'[^\x00-\x7F]+|\x0c',' ', myfile) # remove all non-XML-compatible characters
+        p = document.add_paragraph(myfile)
+        document.save("exports/" + name_of_file + '.docx')
+
+
