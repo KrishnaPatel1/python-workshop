@@ -51,8 +51,9 @@ boilerPlateTextToReplace = {
 
 # Step 2  
 # Set personal details to add to cover letter
-
-# Set date to add to cover letter
+# Retrieve month name rather than number
+currentMonth = date.today().strftime("%B")
+currentDate = currentMonth + " " + str(date.today().day) + ", " + str(date.today().year)
 
 # Set information in a dictionary with above information
 coverLetterInformationToAdd = {
