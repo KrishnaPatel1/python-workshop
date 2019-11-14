@@ -62,10 +62,12 @@ stringToReplaceWith = None
 fileName = None
 
 # Define start, end for the range 
-for row in range(1, rows):
-  for column in range(columns):
-    # Company name
-    if column == 0:
+# First for loop with range of data based on rows
+# Second for loop with range of data based on columns
+
+  # Traverse through all the columns of data in a single row of the excel sheet
+  # Note: Use if and elif statements
+    # Company name 
       fileName = None
       # Set keyToAdd with key from object you want to add
 
@@ -82,19 +84,16 @@ for row in range(1, rows):
         fileName)
       
     # First name
-    elif column == 1:
       # Set keyToAdd with key from object you want to add
 
       # Set stringToReplaceWith from worksheet cell value
 
     # Last name
-    elif column == 2:
       # Set keyToAdd with key from object you want to add
 
       # Set stringToReplaceWith from worksheet cell value
 
     # Gender 
-    elif column == 3:
       # Set keyToAdd with key from object you want to add
 
       if worksheet.cell(row, column).value == "Male":
@@ -104,13 +103,11 @@ for row in range(1, rows):
         # Set stringToReplaceWith from worksheet cell value
 
     # Position Name  
-    elif column == 4:
       # Set keyToAdd with key from object you want to add
 
       # Set stringToReplaceWith from worksheet cell value
 
     # Company Address
-    elif column == 5:
       # Set keyToAdd with key from object you want to add
 
       # Set stringToReplaceWith from worksheet cell value
