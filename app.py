@@ -38,7 +38,7 @@ worksheet = excelFile.sheet_by_name('Sheet1')
 rows = worksheet.nrows
 columns = worksheet.ncols
 
-user_wants_pfd = input("Press 1 for PDF, or 0 for Word docx")
+user_wants_pfd = int(input("Press 1 for PDF, or 0 for Word docx"))
 
 boilerPlateTextToReplace = {
   "myName": "YourName",
@@ -122,7 +122,6 @@ for row in range(1, rows):
 
 # Convert to PDF or Word format
 direct = os.listdir(os.getcwd() + "/exports/")
-#TODO Put this variable somewhere at the top
 path_to_pdf_script = "convert-pdf/txt2pdf.py"
 
 for i in direct:
@@ -135,11 +134,13 @@ for i in direct:
     if user_wants_pfd:
         save_file_as = "exports/" + name_of_file + ".pdf"
         os.system("python " + path_to_pdf_script + " -o " + save_file_as + " -f Tahoma.ttf " + path_to_file)
+        os.remove("exports/" + name_of_file + ".txt")
     else:
         document = Document()
         myfile = open(path_to_file).read()
         myfile = re.sub(r'[^\x00-\x7F]+|\x0c',' ', myfile) # remove all non-XML-compatible characters
         p = document.add_paragraph(myfile)
         document.save("exports/" + name_of_file + '.docx')
+        os.remove("exports/" + name_of_file + ".txt")
 
 
