@@ -38,7 +38,7 @@ worksheet = excelFile.sheet_by_name('Sheet1')
 rows = worksheet.nrows
 columns = worksheet.ncols
 
-# TODO: Make a Object file for this instead
+user_wants_pfd = input("Press 1 for PDF, or 0 for Word docx")
 
 boilerPlateTextToReplace = {
   "myName": "YourName",
@@ -123,7 +123,6 @@ for row in range(1, rows):
 # Convert to PDF or Word format
 direct = os.listdir(os.getcwd() + "/exports/")
 #TODO Put this variable somewhere at the top
-user_wants_pfd = False
 path_to_pdf_script = "convert-pdf/txt2pdf.py"
 
 for i in direct:

@@ -40,6 +40,9 @@ worksheet = excelFile.sheet_by_name('Sheet1')
 rows = worksheet.nrows
 columns = worksheet.ncols
 
+# User input for PDF or Word document
+user_wants_pfd = input("Press 1 for PDF, or 0 for Word docx")
+
 # Step 1
 # Create a dictionary linking your keys, to the values inside the template file
 boilerPlateTextToReplace = {
@@ -126,8 +129,6 @@ fileName = None
 
 # Convert to PDF or Word format
 direct = os.listdir(os.getcwd() + "/exports/")
-#TODO Put this variable somewhere at the top
-user_wants_pfd = False
 path_to_pdf_script = "convert-pdf/txt2pdf.py"
 
 for i in direct:
