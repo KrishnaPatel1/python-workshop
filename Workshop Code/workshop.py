@@ -31,22 +31,22 @@ def findValueInDictionariesAndReplace(templateDict, informationDict, nameOfFile)
 def findValuesAndReplace(dictString, string, nameOfFile):
   findAndReplaceText(dictString, string, nameOfFile)
 
-# Step 1 
-# Retrieve and store the excel file.
-
-# Store Excel file
-
-# Choose sheet inside Excel file
+# Find and store excel file
+excelFile = xlrd.open_workbook('cover_letters.xlsx', on_demand = True)
+# Choose which sheet to use inside your excel file
+worksheet = excelFile.sheet_by_name('Sheet1')
 
 # Set total amount of rows and columns
+rows = worksheet.nrows
+columns = worksheet.ncols
 
-# Step 2
+# Step 1
 # Create a dictionary linking your keys, to the values inside the template file
 boilerPlateTextToReplace = {
   
 }
 
-# Step 3  
+# Step 2  
 # Set personal details to add to cover letter
 
 # Set date to add to cover letter
@@ -114,7 +114,7 @@ for row in range(1, rows):
       # Set keyToAdd with key from object you want to add
 
       # Set stringToReplaceWith from worksheet cell value
-      
+
     
     # Replace remaining template values with excel sheet values
     if keyToAdd != None:
