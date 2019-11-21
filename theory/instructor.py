@@ -5,3 +5,6 @@ hall_building = {
     "floors": 12,
     "classrooms": classrooms_in_hall_building,
 }
+
+print(classrooms_in_hall_building)
+print(hall_building)
