@@ -64,9 +64,8 @@ key_to_add = None
 string_to_replace_with = None
 file_name = None
 
-# Define start, end for the range 
-# First for loop with range of data based on rows
-# Second for loop with range of data based on columns
+for row in range(1, rows):
+  for column in range(columns):
 
   # Traverse through all the columns of data in a single row of the excel sheet
   # Note: Use if and elif statements
