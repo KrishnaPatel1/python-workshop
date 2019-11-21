@@ -6,9 +6,11 @@ print(sum(2,2))
 
 # Challenge 1
 # Modify the sum function using only a return statement
+# Note, use print(method) to print out the value
 
 # Challenge 2
 # Create a function that returns the subtraction of 3 numbers
+# Note, use print(method) to print out the value
 
 # Challenge 3
 # Create a function that prints the percentage, out of 100, of the first number over the second
