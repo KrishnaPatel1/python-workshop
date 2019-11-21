@@ -20,12 +20,14 @@ def find_and_replace_text(stringInFile, string_to_replace_with, name_of_file):
     for line in file:
       print(line.replace(stringInFile, string_to_replace_with), end='')
 
+# Function to find values inside the dictionary provided, and replace
 def find_value_in_dictionaries_and_replace(template_dict, information_dict, name_of_file):
-  for firstKey in template_dict:
-    for secondKey in information_dict:
-      if firstKey == secondKey:
-        find_and_replace_text(template_dict[firstKey], information_dict[secondKey], name_of_file)
+  for first_key in template_dict:
+    for second_key in information_dict:
+      if first_key == second_key:
+        find_and_replace_text(template_dict[first_key], information_dict[second_key], name_of_file)
 
+# Function to find values, and replace
 def find_values_and_replace(dict_string, string, name_of_file):
   find_and_replace_text(dict_string, string, name_of_file)
 
