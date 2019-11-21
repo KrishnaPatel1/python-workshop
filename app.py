@@ -15,24 +15,24 @@ import shutil
 
 
 # Function to find text and replace
-def findAndReplaceText(stringInFile, stringToReplaceWith, nameOfFile):
-  with fileinput.FileInput(nameOfFile, inplace=True) as file:
+def find_and_replace_text(stringInFile, string_to_replace_with, name_of_file):
+  with fileinput.FileInput(name_of_file, inplace=True) as file:
     for line in file:
-      print(line.replace(stringInFile, stringToReplaceWith), end='')
+      print(line.replace(stringInFile, string_to_replace_with), end='')
 
-def findValueInDictionariesAndReplace(templateDict, informationDict, nameOfFile):
-  for firstKey in templateDict:
-    for secondKey in informationDict:
+def find_value_in_dictionaries_and_replace(template_dict, information_dict, name_of_file):
+  for firstKey in template_dict:
+    for secondKey in information_dict:
       if firstKey == secondKey:
-        findAndReplaceText(templateDict[firstKey], informationDict[secondKey], nameOfFile)
+        find_and_replace_text(template_dict[firstKey], information_dict[secondKey], name_of_file)
 
-def findValuesAndReplace(dictString, string, nameOfFile):
-  findAndReplaceText(dictString, string, nameOfFile)
+def find_values_and_replace(dict_string, string, name_of_file):
+  find_and_replace_text(dict_string, string, name_of_file)
 
 # Find and store excel file
-excelFile = xlrd.open_workbook('cover_letters.xlsx', on_demand = True)
+excel_file = xlrd.open_workbook('cover_letters.xlsx', on_demand = True)
 # Choose which sheet to use inside your excel file
-worksheet = excelFile.sheet_by_name('Sheet1')
+worksheet = excel_file.sheet_by_name('Sheet1')
 
 # Set total amount of rows and columns
 rows = worksheet.nrows
@@ -40,85 +40,85 @@ columns = worksheet.ncols
 
 user_wants_pfd = int(input("Press 1 for PDF, or 0 for Word docx"))
 
-boilerPlateTextToReplace = {
-  "myName": "YourName",
-  "myAddress": "YourAddress",
-  "currentDate": "CurrentDate",
-  "companyName": "CompanyName",
-  "firstName": "ContactFirstName",
-  "lastName": "ContactLastName",
+boiler_plate_text_to_replace = {
+  "my_name": "YourName",
+  "my_address": "YourAddress",
+  "current_date": "CurrentDate",
+  "company_name": "CompanyName",
+  "first_name": "ContactFirstName",
+  "last_name": "ContactLastName",
   "gender": "Gender",
-  "positionName": "PositionName",
-  "companyAddress": "CompanyAddress"
+  "position_name": "PositionName",
+  "company_address": "CompanyAddress"
 }
 
 # Define your personal details
 name = "Tony Stark"
 address = "10880 Malibu Point, 90265"
 # Retrieve month name rather than number
-currentMonth = date.today().strftime("%B")
-currentDate = currentMonth + " " + str(date.today().day) + ", " + str(date.today().year)
+current_month = date.today().strftime("%B")
+current_date = current_month + " " + str(date.today().day) + ", " + str(date.today().year)
 
-coverLetterInformationToAdd = {
-  "myName": name,
-  "myAddress": address,
-  "currentDate": currentDate
+cover_letter_information_to_add = {
+  "my_name": name,
+  "my_address": address,
+  "current_date": current_date
 }
 
-keyToAdd = None
-stringToReplaceWith = None
-fileName = None
+key_to_add = None
+string_to_replace_with = None
+file_name = None
 
 # Define start, end for the range 
 for row in range(1, rows):
   for column in range(columns):
     # Company name
     if column == 0:
-      fileName = None
-      keyToAdd = "companyName"
-      stringToReplaceWith = worksheet.cell(row, column).value
+      file_name = None
+      key_to_add = "company_name"
+      string_to_replace_with = worksheet.cell(row, column).value
       # Copy from template text file and name it based on company name
-      fileName = os.getcwd() + "/exports/" + worksheet.cell(row, column).value + ".txt" 
-      shutil.copyfile("cover-letter-template.txt", fileName)
-      findValueInDictionariesAndReplace(
-        boilerPlateTextToReplace, 
-        coverLetterInformationToAdd, 
-        fileName)
+      file_name = os.getcwd() + "/exports/" + worksheet.cell(row, column).value + ".txt" 
+      shutil.copyfile("cover-letter-template.txt", file_name)
+      find_value_in_dictionaries_and_replace(
+        boiler_plate_text_to_replace, 
+        cover_letter_information_to_add, 
+        file_name)
       
     # First name
     elif column == 1:
-      keyToAdd = "firstName"
-      stringToReplaceWith = worksheet.cell(row, column).value
+      key_to_add = "first_name"
+      string_to_replace_with = worksheet.cell(row, column).value
     # Last name
     elif column == 2:
-      keyToAdd = "lastName"
-      stringToReplaceWith = worksheet.cell(row, column).value
+      key_to_add = "last_name"
+      string_to_replace_with = worksheet.cell(row, column).value
     # Gender 
     elif column == 3:
-      keyToAdd = "gender"
+      key_to_add = "gender"
       if worksheet.cell(row, column).value == "Male":
-        stringToReplaceWith = "Mr."
+        string_to_replace_with = "Mr."
       else:
-        stringToReplaceWith = "Ms."
+        string_to_replace_with = "Ms."
     # Position Name  
     elif column == 4:
-      keyToAdd = "positionName"
-      stringToReplaceWith = worksheet.cell(row, column).value
+      key_to_add = "position_name"
+      string_to_replace_with = worksheet.cell(row, column).value
     # Company Address
     elif column == 5:
-      keyToAdd = "companyAddress"
-      stringToReplaceWith = worksheet.cell(row, column).value
+      key_to_add = "company_address"
+      string_to_replace_with = worksheet.cell(row, column).value
     
     # Replace remaining template values with excel sheet values
-    if keyToAdd != None:
-      findValuesAndReplace(
-        boilerPlateTextToReplace[keyToAdd], 
-        stringToReplaceWith, 
-        fileName)
+    if key_to_add != None:
+      find_values_and_replace(
+        boiler_plate_text_to_replace[key_to_add], 
+        string_to_replace_with, 
+        file_name)
 
     # Reset variables
-    keyToAdd = None
-    stringToReplaceWith = None
+    key_to_add = None
+    string_to_replace_with = None
 
 # Convert to PDF or Word format
 direct = os.listdir(os.getcwd() + "/exports/")
@@ -137,9 +137,9 @@ for i in direct:
         os.remove("exports/" + name_of_file + ".txt")
     else:
         document = Document()
-        myfile = open(path_to_file).read()
-        myfile = re.sub(r'[^\x00-\x7F]+|\x0c',' ', myfile) # remove all non-XML-compatible characters
-        p = document.add_paragraph(myfile)
+        my_file = open(path_to_file).read()
+        my_file = re.sub(r'[^\x00-\x7F]+|\x0c',' ', my_file) # remove all non-XML-compatible characters
+        p = document.add_paragraph(my_file)
         document.save("exports/" + name_of_file + '.docx')
         os.remove("exports/" + name_of_file + ".txt")
 
