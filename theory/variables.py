@@ -29,8 +29,14 @@ print()
 ## Print the average between any two numbers
 ## You may define variables to hold the two numbers and one variable to hold the answer
 
+print("Challenge 1:")
+
 ## Challenge 2
 ## Add two strings together and print the result
 
+print("Challenge 2:")
+
 ## Challenge 3
 ## Do whacky things, break the software, and upload your line of code to slido!
+
+print("Challenge 3:")

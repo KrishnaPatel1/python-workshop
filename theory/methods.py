@@ -8,15 +8,23 @@ print(sum(2,2))
 # Modify the sum function using only a return statement
 # Note, use print(method) to print out the value
 
+print("Challenge 1:")
+
 # Challenge 2
 # Create a function that returns the subtraction of 3 numbers
 # Note, use print(method) to print out the value
 
+print("Challenge 2:")
+
 # Challenge 3
 # Create a function that prints the percentage, out of 100, of the first number over the second
+
+print("Challenge 3:")
 
 # Challenge 4
 # Create a function that:
 # if even, print the number and state that it is even
 # if odd, print the number and state that it is odd
 # if less than zero, print the number and state that it is negative
+
+print("Challenge 4:")

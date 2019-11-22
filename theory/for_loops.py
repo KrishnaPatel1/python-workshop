@@ -46,6 +46,10 @@ print("The average is: " + str(average))
 # Compute the total amount of times 4 appears
 list_of_numbers = [3, 4, 7, 23, 12, 4, 4, 2, 10, 4]
 
+print("Challenge 1:")
+
 # Challenge 2
 # Find its respective percentage
+
+print("Challenge 2:")
 
