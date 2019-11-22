@@ -67,8 +67,10 @@ file_name = None
 for row in range(1, rows):
   for column in range(columns):
 
+  # Step 3
   # Traverse through all the columns of data in a single row of the excel sheet
   # Note: Use if and elif statements
+
     # Company name 
       file_name = None
       # Set keyToAdd with key from object you want to add
