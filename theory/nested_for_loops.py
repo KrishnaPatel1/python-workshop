@@ -28,10 +28,16 @@ for i in range(len(list_of_numbers_twoD)):
 # Challenge 1
 # When you find an even number, print "i found an even number"
 
+list_of_numbers_twoD = [[1,7,3,8,2,6],[11,19,71,32,15,10]]
+
+print("Challenge 1:")
+
 # Challenge 2
 # When you find an odd number, print "i found an odd number"
+
+print("Challenge 2:")
 
 # Challenge 3
 # When you find the number 10, print a statement of your choice
 
-list_of_numbers_twoD = [[1,7,3,8,2,6],[11,19,71,32,15,10]]
+print("Challenge 3:")
