@@ -1,4 +1,4 @@
-number = input("Choose a number from 1-9")
+number = int(input("Choose a number from 1-9: "))
 
 # Dictionary example
 # Access variables with their keys, and they will return their values
@@ -32,7 +32,7 @@ elif number == numbers["nine"]:
   print(str(number) + " might be a little much...")
 
 else:
-  print("number is even: " + str(number))
+  print("You didn't a choose a number between 1-9: " + str(number))
 
 
 
@@ -57,22 +57,22 @@ elif number == numbers[8]:
   print(str(number) + " is still a lot")
 
 else:
-  print("Won't change the fact that the number is even: " + str(number))
+  print("Shame on you: " + str(number))
 
 
 
 # Challenge 1
-# Determine the grade of a student given the following grading scheme
+# Determine the grade of a student given the result of a student using following grading scheme
 # Below 25 --> F
 # 25 to 44 --> E
 # 45 to 59 --> D
 # 60 to 74 --> C
 # 75 to 89 --> B
 # Above 90 --> A
+# if the result isn't between 0 - 100, tell the user that he/she is a fool
 print()
 print("Challenge 1")
-
-result = input()
+result = int(input())
 grade = ""
 
 
@@ -83,7 +83,6 @@ grade = ""
 # If a student has an A or B, he/she is an honour student
 print()
 print("Challenge 2")
-
 is_honour_student = None
 
 # Challenge 3
@@ -94,7 +93,10 @@ is_honour_student = None
 print()
 print("Challenge 3")
 print("Press 1 if the student is pursuing a minor, press 0 is the student is not")
+input_ = int(input())
+while (input_ != 1) and (input_ != 0):
+  print("Please insert a value of 1 or 0")
+  input_ = int(input())
 
-pursuing_minor = input()
-
+pursuing_a_minor = bool(input_)
 
