@@ -13,4 +13,9 @@ print(shopping[0])
 print(shopping[1])
 print(shopping[2])
 print(shopping[3])
-print("\n")
+print()
+
+x = shopping[2] + 3
+
+print(x)
+print()
