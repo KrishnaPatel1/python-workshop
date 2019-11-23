@@ -1,3 +1,10 @@
+mustang_year = 2016
+mustang_colour = "red"
+mustang_horsepower = 375
+
+
+
+
 classrooms_in_hall_building = ["H435", "H831", "H545", "H450"]
 
 hall_building = {
@@ -63,3 +70,10 @@ if 2 > 3:
     print("I am inside the if-statement")
 
 print("I am outside the if-statement")
+
+x = 1
+y = 2
+z = False
+result = x*2 >= y != z
+
+print(result)

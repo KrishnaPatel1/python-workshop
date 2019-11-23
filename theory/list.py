@@ -7,7 +7,7 @@ print(shopping[3])
 print()
 
 shopping[0] = 55
-shopping[2] = "gum"
+shopping[3] = "gum"
 
 print(shopping[0])
 print(shopping[1])
