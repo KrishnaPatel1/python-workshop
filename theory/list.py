@@ -19,3 +19,10 @@ x = shopping[2] + 3
 
 print(x)
 print()
+
+# Challenge 1
+# Make a list containing the following numbers and print each one individually
+# 10, 20, 20, 30
+
+# Challenge 2
+# Compute the average all four numbers by accessing them through the list
